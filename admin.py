@@ -1,9 +1,9 @@
 #-*-coding:utf8-*-
 
 from django.contrib import admin
-from models import ImageItem, GalleryGroup
+from models import Photo, Album
 
-class ImageItemAdmin(admin.ModelAdmin):
+class PhotoAdmin(admin.ModelAdmin):
     # Вариант с предопросмотром изображений
     # -- необходимо решить, как отображать уменьшенную копию изображения
     # -- иначе страница долго грузится
@@ -14,8 +14,8 @@ class ImageItemAdmin(admin.ModelAdmin):
     list_filter = ('group',)
     ordering = ['group']
 
-class GalleryGroupAdmin(admin.ModelAdmin):
+class AlbumAdmin(admin.ModelAdmin):
     list_display = ('name',)
 
-admin.site.register(ImageItem, ImageItemAdmin)
-admin.site.register(GalleryGroup, GalleryGroupAdmin)
+admin.site.register(Photo, PhotoAdmin)
+admin.site.register(Album, AlbumAdmin)

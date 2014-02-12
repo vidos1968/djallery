@@ -3,7 +3,7 @@ from django import template
 from django.conf import settings
 from PIL import Image
 from re import sub, match
-from tiempodetango.gallery.models import GalleryGroup, ImageItem
+from tiempodetango.gallery.models import Album, Photo
 import os
 
 # Регистрируем новую библиотеку тегов
@@ -27,7 +27,7 @@ def _add_thumb(s, ext="thumb"):
 @register.simple_tag
 def thumb(imgname, size = 300):
     """Return thumb filename.
-    Вся заморочь в том, что ImageItem из models.py возвращает путь сохранения что-то вроде 'gallery/imagename.ext'
+    Вся заморочь в том, что Photo из models.py возвращает путь сохранения что-то вроде 'gallery/imagename.ext'
     Поэтому чтобы проверить существование файла нужно в начало добавить MEDIA_ROOT (тоесть расположение медиафайлов на ФС)
     В шаблон же возвращать необходимо MEDIA_URL + имя_необходимого_файла """
     fullpath = settings.MEDIA_ROOT + str(imgname)
@@ -47,11 +47,11 @@ def thumb(imgname, size = 300):
 
 def album(context):
     """Показывает альбомы"""
-    groups = GalleryGroup.objects.all()
+    groups = Album.objects.all()
     images = []
     
     for g in groups:
-        cover = ImageItem.objects.all().filter(group = g)
+        cover = Photo.objects.all().filter(group = g)
         cover = cover[0]
         images.append({"id": g.id, "title": g.name, "cover": cover.img})
 

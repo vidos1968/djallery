@@ -24,7 +24,7 @@ class Photo( models.Model ):
     """ Photo ;-) """
     img = models.FileField( upload_to = up_pth )
     alt = models.CharField( u"Короткое описание", max_length = 63 )
-    group = models.ForeignKey( 'GalleryGroup' )
+    group = models.ForeignKey( 'Album' )
     description = models.TextField(u"Описание")
 
     def image_img(self):
