@@ -1,0 +1,10 @@
+{% load gallery_extras %}
+{% block content %}
+<div class="col-xs-6 col-md-3">
+  <a class="fancybox" rel="gallery" href="/media/{{ i.img }}" title="{{ i.alt }}">
+  <img src="{% thumb i.img %}" class="img-thumbnail" alt="{{ i.alt }}"/>
+  </a>
+  {{ i.description|safe }} <br />
+  <p> [<a href="/gallery/group/{{ i.group.id }}">{{ i.group }}</a>] </p>
+</div>
+{% endblock %}

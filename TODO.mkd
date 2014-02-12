@@ -1,0 +1,9 @@
+TODO
+====
+
+* переименовать модели ImageItem и GalleryGroup в Photo и Album соответственно
+* в админке (список изображений) показывать миниатюру (thumb) вместо полной версии изображения
+* избавить ``templatetags`` от импорта ``projectname.gallery.models``
+  Как должно быть: ``from models import ImageItem``
+  Как сейчас: ``from projectname.gallery.models import ImageItem``
+

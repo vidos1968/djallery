@@ -1,0 +1,16 @@
+{% load gallery_extras %}
+<h3>Фотоальбомы</h3>
+<div class="gallery-preview">
+{% for i in images %}
+<div class="gallery-album">
+<h4>{{ i.title }}</h4>
+<div class="wrapper"></div>
+<br />
+<a class="fancybox" href="/gallery/group/{{ i.id }}">
+<img src="{% thumb i.cover 150 %}" class="gallery-image" alt="{{ i.alt }}" />
+</a>
+<div class="wrapper"></div>
+</div>
+{% endfor %}
+<div class="wrapper"></div>
+</div>

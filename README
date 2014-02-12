@@ -1,0 +1,16 @@
+Gallery
+=======
+
+Requirements
+------------
+* PIL (Pillow?)
+
+Install
+-------
+* ???
+* put ``'gallery'`` to ``INSTALLED_APPS``
+* do ``python manage.py syncdb``
+* put some like ``(r'^gallery/$', include('gallery.urls')),`` to you project ``urls.py``
+* ???
+* PROFIT!
+
