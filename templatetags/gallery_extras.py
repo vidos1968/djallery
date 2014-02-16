@@ -3,7 +3,7 @@ from django import template
 from django.conf import settings
 from PIL import Image
 from re import sub, match
-from tiempodetango.gallery.models import Album, Photo
+from gallery.models import Album, Photo
 import os
 
 # Регистрируем новую библиотеку тегов
