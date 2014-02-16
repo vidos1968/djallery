@@ -23,7 +23,7 @@ class Album( models.Model ):
 
 class Photo( models.Model ):
     """ Photo ;-) """
-    img = models.FileField( upload_to = up_pth )
+    img = models.FileField( upload_to = up_pth, verbose_name=_(u"File") )
     alt = models.CharField( _(u"Short description"), max_length = 63 )
     group = models.ForeignKey( 'Album', verbose_name=_(u"Album") )
     description = models.TextField(_(u"Description"))
