@@ -25,7 +25,7 @@ class Photo( models.Model ):
     """ Photo ;-) """
     img = models.FileField( upload_to = up_pth )
     alt = models.CharField( _(u"Short description"), max_length = 63 )
-    group = models.ForeignKey( 'Album' )
+    group = models.ForeignKey( 'Album', verbose_name=_(u"Album") )
     description = models.TextField(_(u"Description"))
 
     def image_img(self):
@@ -35,7 +35,7 @@ class Photo( models.Model ):
         else:
             return '(none)'
 
-    image_img.short_description = 'Thumb'
+    image_img.short_description = _(u"Thumb")
     image_img.allow_tags = True
 
     def __unicode__( self ):

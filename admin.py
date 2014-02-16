@@ -1,4 +1,4 @@
-#-*-coding:utf8-*-
+# -*- coding: utf-8 -*-
 
 from django.contrib import admin
 from models import Photo, Album
@@ -8,9 +8,8 @@ class PhotoAdmin(admin.ModelAdmin):
     # -- необходимо решить, как отображать уменьшенную копию изображения
     # -- иначе страница долго грузится
     #
-    list_display = ('image_img', 'alt', 'description', 'group', )
+    list_display = ('image_img', 'description', 'alt', 'group', )
 
-    #list_display = ('alt', 'description', 'group', )
     list_filter = ('group',)
     ordering = ['group']
 
