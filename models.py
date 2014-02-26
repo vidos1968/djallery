@@ -31,7 +31,7 @@ class Photo( models.Model ):
     def image_img(self):
         from templatetags import gallery_extras
         if self.img:
-            return u'<img src="%s" width="auto" />' %(gallery_extras.thumb(self.img, 150))
+            return '<img src="%s" width="auto" />' %(gallery_extras.thumb(self.img, 150))
         else:
             return '(none)'
 
