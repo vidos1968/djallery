@@ -28,6 +28,56 @@ def _img_renamer():
             img.img.name = sub(r"[Jj][Pp](E|e|)[Gg]$", "jpg", img.img.__str__())
             img.save()
 
+def album_cover(album, size=(320,320)):
+    """
+    Creates or find album cover
+    @return cover filename
+    """
+
+    from PIL import Image
+    from os.path import join, isfile
+
+    tsize = size[0]/1
+    tsize = (tsize,tsize)
+
+    cover_filename = "album_" + str(album.id) + ".cover.jpg"
+    fullpath = join(settings.MEDIA_ROOT, cover_filename)
+
+    cover = Image.new("RGBA", size, 0)
+
+    if isfile(cover_filename):
+        #return cover_filename
+        pass
+
+    offset = 0
+    images = Photo.objects.filter(group=album)
+
+    if len(images) > 5:
+        images = images[0:5]
+
+    for i in images:
+        i = Image.open(join(settings.MEDIA_ROOT, i.img.name))
+
+        # подгоняем миниатюры под квадрат
+        # изображение растягивается так, чтобы меньшая сторона
+        # полностью заполнила пространство
+        if i.size[0] > i.size[1]:
+            i.thumbnail((tsize[0]*2,tsize[0]), Image.ANTIALIAS)
+        else:
+            i.thumbnail((tsize[0],tsize[0]*2), Image.ANTIALIAS)
+
+        # средняя ширина изображения
+        wmiddle = size[0]/len(images)
+        x = (i.size[0]-wmiddle)/2
+
+        i = i.crop((x,0,x+wmiddle,size[1]))
+
+        cover.paste(i, (offset,0))
+        offset += wmiddle
+
+    cover.save(fullpath)
+    return cover_filename
+
 
 def all_albums(request):
     """Показывает альбомы"""
@@ -36,9 +86,8 @@ def all_albums(request):
     albums = []
 
     for g in groups:
-        cover = Photo.objects.all().filter(group = g)
-        cover = cover[0]
-        albums.append({"id": g.id, "caption": g.name, "cover": cover.img.name})
+        cover = album_cover(g)
+        albums.append({"id": g.id, "caption": g.name, "cover": cover})
 
     return render_to_response("albums.html", {'album_list': albums})
 
