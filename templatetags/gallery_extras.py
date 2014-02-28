@@ -48,13 +48,15 @@ def thumb(imgname, size = 300):
 
 def album(context):
     """Показывает альбомы"""
+
+    from gallery.views import album_cover
+
     groups = Album.objects.all()
     images = []
     
     for g in groups:
-        cover = Photo.objects.all().filter(group = g)
-        cover = cover[0]
-        images.append({"id": g.id, "title": g.name, "cover": cover.img})
+        cover = album_cover(g)
+        images.append({"id": g.id, "caption": g.name, "cover": cover})
 
     context['images'] = images
     return context

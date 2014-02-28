@@ -1,16 +1,10 @@
 {% load gallery_extras %}
 <h3>Фотоальбомы</h3>
 <div class="gallery-preview">
-{% for i in images %}
-<div class="gallery-album">
-<h4>{{ i.title }}</h4>
-<div class="wrapper"></div>
-<br />
-<a href="/gallery/group/{{ i.id }}">
-<img src="{% thumb i.cover 150 %}" class="img-thumbnail" alt="{{ i.alt }}" />
-</a>
-<div class="wrapper"></div>
-</div>
+{% for a in images %}
+    <p>
+    {% include "gallery/album.html" %}
+    </p>
 {% endfor %}
 <div class="wrapper"></div>
 </div>

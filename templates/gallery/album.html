@@ -5,7 +5,8 @@
          <a href="/gallery/group/{{ a.id }}">{{ a.caption }}</a>
     </div>
     <a rel="gallery" href="/gallery/group/{{ a.id }}">
-        <img src="{% thumb a.cover 300 %}"
+        {#<img src="{% thumb a.cover 300 %}"#}
+        <img src="/media/{{ a.cover }}"
             class="img-thumbnail photo"
             itemprop="contentUrl" />
     </a>
