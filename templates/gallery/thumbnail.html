@@ -4,7 +4,9 @@
   <a class="fancybox-thumb" rel="gallery" href="/media/{{ i.img }}" title="{{ i.alt }}">
   <img src="{% thumb i.img %}" class="img-thumbnail" alt="{{ i.alt }}"/>
   </a>
-  {{ i.description|safe }} <br />
+  <div class="photo-description" style="clear:both">
+  {{ i.description|safe }}
+  </div>
   <p> [<a href="/gallery/group/{{ i.group.id }}">{{ i.group }}</a>] </p>
 </div>
 {% endblock %}
