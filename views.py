@@ -45,18 +45,20 @@ def album_cover(album, size=(320,320)):
 
     cover = Image.new("RGBA", size, 0)
 
-    if isfile(cover_filename):
-        #return cover_filename
-        pass
+    if isfile(cover_filename) and not settings.DEBUG:
+        return cover_filename
 
     offset = 0
     images = Photo.objects.filter(group=album)
 
-    if len(images) > 5:
-        images = images[0:5]
+    if len(images) > 3:
+        images = images[0:3]
 
     for i in images:
-        i = Image.open(join(settings.MEDIA_ROOT, i.img.name))
+        # используя i.img.name можно наткнуться на UnicodeEncodeError
+        # с русскими именами файлов.
+        # преобразование объекта в строку даёт нужный результат
+        i = Image.open(settings.MEDIA_ROOT + str(i.img))
 
         # подгоняем миниатюры под квадрат
         # изображение растягивается так, чтобы меньшая сторона

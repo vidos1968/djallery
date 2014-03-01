@@ -5,10 +5,12 @@ from re import sub
 
 def up_pth(instance, filename):
     """Upload path with needed filenames"""
+    from os.path import join
+
     i = instance.img.name
     name = sub("\ ", "_", i)
     name = sub(r"[Jj][Pp](E|e|)[Gg]$", "jpg", name)
-    return u"gallery/%s" % ( name ) 
+    return join("gallery" , name )
 
 class Album( models.Model ):
     """ Что-то вроде фотоальбома. Группа изображений """
