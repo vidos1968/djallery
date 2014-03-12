@@ -45,6 +45,30 @@ def thumb(imgname, size = 300):
         else:
             return settings.MEDIA_URL + "broken.jpg"
 
+@register.simple_tag
+def thumbz(imgname, size=300):
+    """Return thumb filename.
+       отличается тем, что создаёт квадратное превью """
+    fullpath = settings.MEDIA_ROOT + str(imgname)
+    thumb = _add_thumb(str(imgname), ext="thumb"+str(size))
+
+    if os.access(thumb, os.F_OK) and not settings.DEBUG:
+        return thumb
+    else:
+        if os.access(fullpath, os.F_OK):
+            img = Image.open(fullpath)
+
+            s = min(img.size[0], img.size[1])
+            d = max(img.size[0], img.size[1])
+            d = (d - s)/2
+            img = img.crop((0,0,s,s))
+
+            img.thumbnail((size,size), Image.ANTIALIAS)
+            img.save(_add_thumb(fullpath, ext="thumb"+str(size)), 'JPEG')
+            return settings.MEDIA_URL + _add_thumb(str(imgname), ext="thumb"+str(size))
+        else:
+            return settings.MEDIA_URL + "broken.jpg"
+
 
 def album(context):
     """Показывает альбомы"""
