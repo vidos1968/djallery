@@ -1,12 +1,12 @@
 {% load gallery_extras %}
 {% block content %}
-<div class="col-xs-6 col-md-3">
+<div class="col-xs-6 col-md-3 photo-block">
   <a class="fancybox-thumb" rel="gallery" href="/media/{{ i.img }}" title="{{ i.alt }}">
-  <img src="{% thumb i.img %}" class="img-thumbnail" alt="{{ i.alt }}"/>
+  <img src="{% thumb_square i.img %}" class="img-thumbnail" alt="{{ i.alt }}"/>
   </a>
   <div class="photo-description" style="clear:both">
   {{ i.description|safe }}
   </div>
-  <p> [<a href="/gallery/group/{{ i.group.id }}">{{ i.group }}</a>] </p>
+  <div class="photo-tags"> <span class="glyphicon glyphicon-tag"></span> <a href="/gallery/group/{{ i.group.id }}">{{ i.group }}</a></div>
 </div>
 {% endblock %}

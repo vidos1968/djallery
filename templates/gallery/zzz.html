@@ -1,8 +1,0 @@
-{% block content %}<h3>Галерея</h3>
-<div id="gallery_image">
-{% load gallery_extras %}
-    <a href="/media/{{ images.img }}"><img src="{% thumb images.img %}" alt="{{ images.alt }}" width="300px" /></a>
-    <br>
-    {{ images.description|safe }}
-</div>
-{% endblock %}

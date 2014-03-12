@@ -46,7 +46,7 @@ def thumb(imgname, size = 300):
             return settings.MEDIA_URL + "broken.jpg"
 
 @register.simple_tag
-def thumbz(imgname, size=300):
+def thumb_square(imgname, size=300):
     """Return thumb filename.
        отличается тем, что создаёт квадратное превью """
     fullpath = settings.MEDIA_ROOT + str(imgname)
