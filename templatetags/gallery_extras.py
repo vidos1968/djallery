@@ -73,13 +73,11 @@ def thumb_square(imgname, size=300):
 def album(context):
     """Показывает альбомы"""
 
-    from gallery.views import album_cover
-
     groups = Album.objects.all()
     images = []
     
     for g in groups:
-        cover = album_cover(g)
+        cover = g.cover()
         images.append({"id": g.id, "caption": g.name, "cover": cover})
 
     context['images'] = images
