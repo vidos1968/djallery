@@ -4,7 +4,7 @@ from django import template
 from django.conf import settings
 from PIL import Image
 from re import sub, match
-from gallery.models import Album, Photo
+from ..models import Album, Photo
 import os
 
 # Регистрируем новую библиотеку тегов
