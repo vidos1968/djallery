@@ -56,7 +56,10 @@ class Album( models.Model ):
             # используя i.img.name можно наткнуться на UnicodeEncodeError
             # с русскими именами файлов.
             # преобразование объекта в строку даёт нужный результат
-            i = Image.open(settings.MEDIA_ROOT + str(i.img))
+            if isfile(join(settings.MEDIA_ROOT, str(i.img))):
+                i = Image.open(settings.MEDIA_ROOT + str(i.img))
+            else:
+                break
 
             # подгоняем миниатюры под квадрат
             # изображение растягивается так, чтобы меньшая сторона

@@ -9,12 +9,12 @@ TODO
 * объединить (в админке) редактирование альбомов и изображений в одну страницу
   * как?!
 * manage.py комманда для удаления всех миниатюр
-* избавить ``templatetags`` от импорта ``projectname.gallery.models``
-  Как должно быть: ``from models import ImageItem``
-  Как сейчас: ``from projectname.gallery.models import ImageItem``
 
 Сделано
 -------
 
 * в админке (список изображений) показывать миниатюру (thumb) вместо полной версии изображения
   * использовать для этого метод ``Photo.image_img()``
+* избавить ``templatetags`` от импорта ``projectname.gallery.models``
+  Как должно быть: ``from models import ImageItem``
+  Как сейчас: ``from projectname.gallery.models import ImageItem``
