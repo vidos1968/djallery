@@ -78,7 +78,7 @@ class Album( models.Model ):
             cover.paste(i, (offset,0))
             offset += wmiddle
 
-        cover.save(fullpath)
+        cover.save(fullpath, "JPEG", quality=80, optimize=True, progressive=True)
         return cover_filename
 
     class Meta:
