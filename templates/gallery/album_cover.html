@@ -1,0 +1,9 @@
+{% load gallery_extras %}{% block content %}<!-- begin album_content.html -->
+<a rel="gallery" href="/gallery/group/{{ a.id }}">
+  <img src="/media/{{ a.cover }}" class="img-thumbnail photo" itemprop="contentUrl" />
+</a>
+<div class="album_cover_tag">
+  <span class="glyphicon glyphicon-tag"></span>
+  <a href="/gallery/group/{{ a.id }}">{{ a.name }}</a>
+</div>
+<!-- end album_content.html -->{% endblock %}
