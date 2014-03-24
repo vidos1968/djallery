@@ -58,11 +58,18 @@ def thumb_square(imgname, size=300):
         if os.access(fullpath, os.F_OK):
             img = Image.open(fullpath)
 
+            # square crop
             s = min(img.size[0], img.size[1])
-            d = max(img.size[0], img.size[1])
-            d = (d - s)/2
-            img = img.crop((0,0,s,s))
+            d = (max(img.size[0], img.size[1]) - s)/2
 
+            vo = ho = 0 # vertical and horisontal offset
+            if img.size[0] > img.size[1]:
+                ho = d
+            else:
+                vo = d
+            img = img.crop((ho,vo,ho+s,vo+s))
+
+            # do thumb
             img.thumbnail((size,size), Image.ANTIALIAS)
             img.save(_add_thumb(fullpath, ext="thumb"+str(size)), 'JPEG')
             return settings.MEDIA_URL + _add_thumb(str(imgname), ext="thumb"+str(size))
