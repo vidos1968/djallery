@@ -1,5 +1,5 @@
 {% load gallery_extras %}{% block content %}<!-- begin gallery/thumbnail.html -->
-<a class="fancybox-thumb" rel="gallery" href="/media/{{ i.img }}" title="{{ i.description }}">
+<a class="fancybox-thumb" rel="gallery" href="{% thumb i.img 960 %}" title="{{ i.description }}">
   <img src="{% thumb_square i.img %}" class="img-thumbnail" alt="{{ i.alt }}"/>
 </a>
 <div class="photo-description"> {{ i.alt }} </div>
