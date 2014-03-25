@@ -92,15 +92,20 @@ class Photo( models.Model ):
     group = models.ForeignKey( 'Album', verbose_name=_(u"Album") )
     description = models.TextField(_(u"Description"))
 
-    def image_img(self):
-        from templatetags import gallery_extras
+    def image_thumb(self):
+        from easy_thumbnails.files import get_thumbnailer
+
+        size = (150, 150)
+        options = {'size': size, 'crop': True}
+        thumb_url = get_thumbnailer(self.img).get_thumbnail(options).url
+
         if self.img:
-            return '<img src="%s" width="auto" />' %(gallery_extras.thumb(self.img, 150))
+            return '<img src="%s" width="%dpx" />' %(thumb_url, size[0])
         else:
             return '(none)'
 
-    image_img.short_description = _(u"Thumb")
-    image_img.allow_tags = True
+    image_thumb.short_description = _(u"Thumb")
+    image_thumb.allow_tags = True
 
     def __unicode__( self ):
         return u"%s -- %s" % (self.alt, self.group)

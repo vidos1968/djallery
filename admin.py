@@ -4,11 +4,7 @@ from django.contrib import admin
 from models import Photo, Album
 
 class PhotoAdmin(admin.ModelAdmin):
-    # Вариант с предопросмотром изображений
-    # -- необходимо решить, как отображать уменьшенную копию изображения
-    # -- иначе страница долго грузится
-    #
-    list_display = ('image_img', 'description', 'alt', 'group', )
+    list_display = ('image_thumb', 'description', 'alt', 'group', )
 
     list_filter = ('group',)
     ordering = ['group']

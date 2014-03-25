@@ -5,7 +5,7 @@
 <script type="text/javascript" src="http://yandex.st/jquery/fancybox/2.0.6/jquery.fancybox.min.js"></script>
 <link rel="stylesheet" href="http://yandex.st/jquery/fancybox/2.0.6/jquery.fancybox.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="/static/gallery.css" type="text/css" media="screen" />
-{% endblock %}{% block content %}
+{% endblock %}{% block content %}<!-- begin album_photos.html -->
 <script type="text/javascript">
 $(document).ready(function() {
   $(".fancybox-thumb").fancybox({
@@ -15,12 +15,16 @@ $(document).ready(function() {
   });
 });
 </script>
-<!-- begin album_photos.html -->
+
 <h3>{{ caption }}</h3>
+{% for i in images %}
+{% if forloop.first %}
 <div class="row">
-  {% for i in images %}
-  <div class="col-xs-6 col-md-3 photo-block">
-  {% include "gallery/thumbnail.html" %}
-  </div>{% endfor %}
+{% endif %}
+{% include "gallery/thumbnail.html" with album_page=1 %}
+{% if forloop.counter|divisibleby:"3" %}
 </div><!-- end row -->
+<div class="row">
+{% endif %}
+{% endfor %}
 <!-- end album_photos.html -->{% endblock %}

@@ -4,6 +4,7 @@ Gallery
 Requirements
 ------------
 * PIL (Pillow?)
+* easy-thumbnails
 
 Install
 -------

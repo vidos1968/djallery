@@ -1,10 +1,16 @@
-{% load gallery_extras %}{% block content %}<!-- begin gallery/thumbnail.html -->
-<a class="fancybox-thumb" rel="gallery" href="{% thumb i.img 960 %}" title="{{ i.description }}">
-  <img src="{% thumb_square i.img %}" class="img-thumbnail" alt="{{ i.alt }}"/>
+{% load thumbnail %}{% block content %}<!-- begin gallery/thumbnail.html -->
+<div class="col-sm-6 col-md-4 photo-block">
+<div class="thumbnail">
+<a class="fancybox-thumb" rel="gallery" href="{% thumbnail i.img 960x960 %}" title="{{ i.description }}">
+  <img src="{% thumbnail i.img 300x300 crop="smart" %}" class="img-thumbnail" alt="{{ i.alt }}"/>
 </a>
-<div class="photo-description"> {{ i.alt }} </div>
+<div class="caption">
+<h4> {{ i.alt }}</h4> </div>
+{% if not album_page %}
 <div class="photo-tags">
   <span class="glyphicon glyphicon-tag"></span>
   <a href="/gallery/group/{{ i.group.id }}">{{ i.group }}</a>
 </div>
-<!-- end gallery/thumbnail.html -->{% endblock %}
+{% endif %}
+</div>
+</div><!-- end gallery/thumbnail.html -->{% endblock %}
