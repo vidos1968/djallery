@@ -90,7 +90,7 @@ class Photo( models.Model ):
     img = models.FileField( upload_to = up_pth, verbose_name=_(u"File") )
     alt = models.CharField( _(u"Short description"), max_length = 63 )
     group = models.ForeignKey( 'Album', verbose_name=_(u"Album") )
-    description = models.TextField(_(u"Description"))
+    description = models.TextField(_(u"Description"), blank=True)
 
     def image_thumb(self):
         from easy_thumbnails.files import get_thumbnailer

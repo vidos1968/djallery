@@ -1,8 +1,8 @@
 {% load thumbnail %}{% block content %}<!-- begin gallery/thumbnail.html -->
-<div class="col-sm-6 col-md-4 photo-block">
+<div class="col-sm-6 col-md-4">
 <div class="thumbnail">
 <a class="fancybox-thumb" rel="gallery" href="{% thumbnail i.img 960x960 %}" title="{{ i.description }}">
-  <img src="{% thumbnail i.img 300x300 crop="smart" %}" class="img-thumbnail" alt="{{ i.alt }}"/>
+  <img src="{% thumbnail i.img 300x300 crop="smart" %}" class="img-thumbnail" style="padding: 0" alt="{{ i.alt }}"/>
 </a>
 <div class="caption">
 <h4> {{ i.alt }}</h4> </div>
