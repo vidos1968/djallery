@@ -25,5 +25,8 @@ $(document).ready(function() {
 </div><!-- end row -->
 <div class="row">
 {% endif %}
+{% if forloop.last %}
+</div>
+{% endif %}
 {% endfor %}
 <!-- end album_photos.html -->{% endblock %}
