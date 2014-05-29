@@ -1,0 +1,24 @@
+/* Gallery */
+
+/* Album */
+.album_list > .album_cover {
+  width: 10%;
+  display: table-cell;
+}
+
+.album_list hr {
+  border: 0;
+  border-bottom: 1px dashed #ccc;
+  height: 0;
+}
+
+/* Photo */
+.thumbnail {
+  display: table-cell;
+  width: 10%;
+  padding: 10pt;
+}
+
+.thumbnail img {
+  width: 100%;
+}
