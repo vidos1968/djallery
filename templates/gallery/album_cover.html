@@ -1,6 +1,6 @@
 <section class="album_cover">
-  <h3><a href="{{ a.get_absolute_url }}">{{ a.name }}</a></h3>
   <a rel="gallery" href="{{ a.get_absolute_url }}">
     <img src="/media/{{ a.cover }}" class="img-thumbnail photo" itemprop="contentUrl" />
   </a>
+  <h3><a href="{{ a.get_absolute_url }}">{{ a.name }}</a></h3>  
 </section>
