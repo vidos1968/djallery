@@ -3,10 +3,11 @@
 from django.shortcuts import render_to_response
 from models import Photo, Album
 from django.conf import settings
+from django.http import Http404
 from os import listdir, chdir, rename
 
 from re import match, sub
-from models import Photo
+from models import *
 
 
 def all_albums(request):
@@ -31,7 +32,13 @@ def image(request, img_id):
 
 def album_photos(request, album_id):
     """ show all images placed in group 'group' """
-    album = Album.objects.get( id = album_id )
-    img = Photo.objects.filter(group = album)
-    return render_to_response("gallery/album_photos.html", {'images': img, 'caption': album.name,})
+    try:
+        a = Album.objects.get(id=album_id)
+        p = Photo.objects.filter(group=a)
+    except Album.DoesNotExist:
+        raise Http404
 
+    return render_to_response("gallery/photo_list.html", {
+        'photos': p,
+        'caption': a.name,
+    })

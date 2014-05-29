@@ -1,0 +1,9 @@
+<section>
+  <h2>Фотоальбомы</h2>
+
+  <div class="album_list">
+  {% for a in album_list %}
+    {% include "gallery/album_cover.html" %}
+  {% endfor %}
+  </div>
+</section>
