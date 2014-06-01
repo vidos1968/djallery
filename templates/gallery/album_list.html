@@ -1,9 +1,15 @@
+{% extends "gallery/base.html" %}
+{% block content %}
 <section>
   <h2>Фотоальбомы</h2>
 
   <div class="album_list">
   {% for a in album_list %}
     {% include "gallery/album_cover.html" %}
+    {% if forloop.counter|divisibleby:"3" %}
+    {% if not forloop.last %}<hr />{% endif %}
+    {% endif %}
   {% endfor %}
   </div>
 </section>
+{% endblock %}
