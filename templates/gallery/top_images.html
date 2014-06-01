@@ -1,0 +1,8 @@
+{% load thumbnail %}
+<div id="latest_images">
+{% for i in images %}
+<a href="{{ i.group.get_absolute_url }}{{ i.get_anchor }}">
+  <img src="{% thumbnail i.img 300x300 crop='smart' %}" alt="{{ i.alt }}">
+</a>
+{% endfor %}
+</div>

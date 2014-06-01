@@ -77,16 +77,9 @@ def thumb_square(imgname, size=300):
             return settings.MEDIA_URL + "broken.jpg"
 
 
-def album(context):
-    """Показывает альбомы"""
+@register.inclusion_tag("gallery/top_images.html", takes_context=True)
+def latest_images(context, count=3):
+    """Показывает последние добавленные изображения"""
 
-    groups = Album.objects.all()
-    images = []
-    
-    for g in groups:
-        cover = g.cover()
-        images.append({"id": g.id, "caption": g.name, "cover": cover})
-
-    context['images'] = images
+    context['images'] = Photo.objects.all().order_by('-id')[:count]
     return context
-register.inclusion_tag("gallery/top_images.html", takes_context=True)(album)
