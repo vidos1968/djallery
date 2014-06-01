@@ -3,15 +3,14 @@ Gallery
 
 Requirements
 ------------
-* PIL (Pillow?)
-* easy-thumbnails
+* [easy-thumbnails](https://github.com/SmileyChris/easy-thumbnails)
 
 Install
 -------
-* ???
-* put ``'gallery'`` to ``INSTALLED_APPS``
-* do ``python manage.py syncdb``
-* put some like ``(r'^gallery/$', include('gallery.urls')),`` to you project ``urls.py``
-* ???
-* PROFIT!
+2. git clone ``https://github.com/xevinbox/djallery.git``
+2. put ``'gallery'`` to ``INSTALLED_APPS``
+2. do ``python manage.py syncdb``
+2. put some like ``(r'^gallery/$', include('gallery.urls')),`` to you project ``urls.py``
+2. ???
+2. PROFIT!
 
