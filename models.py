@@ -96,7 +96,7 @@ class Photo( models.Model ):
     description = models.TextField(_(u"Description"), blank=True)
 
     def get_anchor(self):
-        return "#photo_%d" % self.pk
+        return "photo_%d" % self.pk
 
     def image_thumb(self):
         from easy_thumbnails.files import get_thumbnailer
