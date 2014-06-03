@@ -1,8 +1,11 @@
 {% extends "base.html" %}
-{#% load i18n %#}
+{% load i18n %}
+{% load staticfiles %}
+
 {% block extrahead %}
-<link rel="stylesheet" href="/static/css/gallery.css" />
+<link rel="stylesheet" href="{% static "css/gallery.css" %}" />
 {% endblock %}
-{% block title %}Галерея - {{ block.super }}{% endblock %}
+
+{% block title %}{% trans "Gallery" %} - {{ block.super }}{% endblock %}
 {% block content %}
 {% endblock %}

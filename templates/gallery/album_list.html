@@ -1,7 +1,8 @@
 {% extends "gallery/base.html" %}
+{% load i18n %}
 {% block content %}
 <section>
-  <h2>Фотоальбомы</h2>
+  <h2>{% trans "Photoalbums" %}</h2>
 
   <div class="album_list">
   {% for a in album_list %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-17 03:25+0600\n"
+"POT-Creation-Date: 2014-06-04 04:42+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,34 +17,42 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: models.py:15
+#: models.py:21
 msgid "Name"
 msgstr "Название"
 
-#: models.py:26
+#: models.py:93
 msgid "File"
 msgstr "Файл"
 
-#: models.py:27
+#: models.py:94
 msgid "Short description"
 msgstr "Короткое описание"
 
-#: models.py:28
+#: models.py:95
 msgid "Album"
 msgstr "Альбом"
 
-#: models.py:29
+#: models.py:96
 msgid "Description"
 msgstr "Описание"
 
-#: models.py:38
+#: models.py:113
 msgid "Thumb"
 msgstr "Миниатюра"
 
-#: models.py:45
+#: models.py:120
 msgid "Photo"
 msgstr "Фотография"
 
-#: models.py:46
+#: models.py:121
 msgid "Photos"
 msgstr "Фотографии"
+
+#: templates/gallery/album_list.html:5
+msgid "Photoalbums"
+msgstr "Фотоальбомы"
+
+#: templates/gallery/base.html:9
+msgid "Gallery"
+msgstr "Галерея"
