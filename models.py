@@ -88,17 +88,20 @@ class Album( models.Model ):
         verbose_name = u"Фото альбом"
         verbose_name_plural = u"Фото альбомы"
 
-class Photo( models.Model ):
-    """ Photo ;-) """
-    img = models.FileField( upload_to = up_pth, verbose_name=_(u"File") )
-    alt = models.CharField( _(u"Short description"), max_length = 63 )
-    group = models.ForeignKey( 'Album', verbose_name=_(u"Album") )
+class Photo(models.Model):
+    img = models.FileField(upload_to = up_pth, verbose_name=_(u"File"))
+    alt = models.CharField(_(u"Short description"), max_length=63)
+    group = models.ForeignKey('Album', verbose_name=_(u"Album"))
     description = models.TextField(_(u"Description"), blank=True)
 
     def get_anchor(self):
         return "photo_%d" % self.pk
 
+    def get_absolute_url(self):
+        return "%s#%s" % (self.group.get_absolute_url(), self.get_anchor())
+
     def image_thumb(self):
+        ''' for admin site '''
         from easy_thumbnails.files import get_thumbnailer
 
         size = (150, 150)
