@@ -7,6 +7,7 @@ from re import sub
 # Global path
 GALLERY_DIR = 'gallery'
 
+
 def up_pth(instance, filename):
     """Upload path with needed filenames"""
     from os.path import join
@@ -16,8 +17,9 @@ def up_pth(instance, filename):
     name = sub(r"[Jj][Pp](E|e|)[Gg]$", "jpg", name)
     return join(GALLERY_DIR, name )
 
+
 class Album( models.Model ):
-    """ Что-то вроде фотоальбома. Группа изображений """
+    """ Фотоальбом """
     name = models.CharField( _(u"Name"), max_length = 120 )
 
     def __unicode__(self):
@@ -26,73 +28,23 @@ class Album( models.Model ):
     def get_absolute_url(self):
         return u'/gallery/album/%d/' % self.id
 
-    def cover(self, size=(300,300)):
-        """
-        Creates or find album cover
-        @return cover filename
-        """
+    def cover(self, size=(300,300), crop=True):
+        photo = Photo.objects.filter(group=self, album_cover=True) or\
+           Photo.objects.filter(group=self)
 
-        from PIL import Image
-        from os.path import join, isfile
-
-        tsize = size[0]/1
-        tsize = (tsize,tsize)
-
-        images = Photo.objects.filter(group=self)
-        cover_filename = "%03d-%s.cover_%02d.jpg" % (self.id,
-            self.name.encode('utf-8').replace(' ', '_'),
-            len(images))
-        cover_filename = join(GALLERY_DIR, cover_filename)
-        fullpath = join(settings.MEDIA_ROOT, cover_filename)
-
-        cover = Image.new("RGBA", size, 0)
-
-        if isfile(cover_filename) and not settings.DEBUG:
-            return cover_filename
-
-        offset = 0
-
-        if len(images) > 3:
-            images = images[0:3]
-
-        for i in images:
-            # используя i.img.name можно наткнуться на UnicodeEncodeError
-            # с русскими именами файлов.
-            # преобразование объекта в строку даёт нужный результат
-            if isfile(join(settings.MEDIA_ROOT, str(i.img))):
-                i = Image.open(settings.MEDIA_ROOT + str(i.img))
-            else:
-                break
-
-            # подгоняем миниатюры под квадрат
-            # изображение растягивается так, чтобы меньшая сторона
-            # полностью заполнила пространство
-            if i.size[0] > i.size[1]:
-                i.thumbnail((tsize[0]*2,tsize[0]), Image.ANTIALIAS)
-            else:
-                i.thumbnail((tsize[0],tsize[0]*2), Image.ANTIALIAS)
-
-            # средняя ширина изображения
-            wmiddle = size[0]/len(images)
-            x = (i.size[0]-wmiddle)/2
-
-            i = i.crop((x,0,x+wmiddle,size[1]))
-
-            cover.paste(i, (offset,0))
-            offset += wmiddle
-
-        cover.save(fullpath, "JPEG", quality=80, optimize=True, progressive=True)
-        return cover_filename
+        return photo[0].img
 
     class Meta:
         verbose_name = u"Фото альбом"
         verbose_name_plural = u"Фото альбомы"
+
 
 class Photo(models.Model):
     img = models.FileField(upload_to = up_pth, verbose_name=_(u"File"))
     alt = models.CharField(_(u"Short description"), max_length=63)
     group = models.ForeignKey('Album', verbose_name=_(u"Album"))
     description = models.TextField(_(u"Description"), blank=True)
+    album_cover = models.BooleanField(default=False, blank=True)
 
     def get_anchor(self):
         return "photo_%d" % self.pk
@@ -122,4 +74,3 @@ class Photo(models.Model):
     class Meta:
         verbose_name = _(u"Photo")
         verbose_name_plural = _(u"Photos")
-
