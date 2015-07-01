@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from django.conf.urls.defaults import patterns, include, url
-from django.views.generic import ListView
-from views import *
-from models import *
+from django.conf.urls import patterns, url
+from views import AlbumList, AlbumDetail
 
 urlpatterns = patterns('',
-    url(r'^$', ListView.as_view(model=Album), name='all_albums'),
-    (r'^album/(?P<pk>.*)/$', album_photos),
+    url(r'^$', AlbumList.as_view(), name='all_albums'),
+    url(r'^album/(?P<pk>.*)/$', AlbumDetail.as_view()),
 )

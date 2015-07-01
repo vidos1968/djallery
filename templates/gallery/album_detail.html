@@ -1,5 +1,7 @@
 {% extends "gallery/base.html" %}
-{% block title %}фотоальбом "{{ caption }}" - {{ block.super }} {% endblock %}
+{% load thumbnail %}
+
+{% block title %}фотоальбом "{{ object.name }}" - {{ block.super }} {% endblock %}
 {% block extrahead %}
 {{ block.super }}
 <link rel="stylesheet" href="http://yandex.st/jquery/fancybox/2.0.6/jquery.fancybox.css" type="text/css" media="screen" />
@@ -7,7 +9,7 @@
 <script type="text/javascript" src="http://yandex.st/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript" src="http://yandex.st/jquery/fancybox/2.0.6/jquery.fancybox.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function() {
+$(function() {
   $(".fancybox-thumb").fancybox({
     helpers : {
       title : { type : 'inside' },
@@ -16,13 +18,24 @@ $(document).ready(function() {
 });
 </script>
 {% endblock %}
+
 {% block content %}
-<h3>{{ caption }}</h3>
+<h2>{{ object.name }}</h2>
 <div class="photo_list">
-{% for i in photos %}
-{% include "gallery/thumbnail.html" %}
-{% if forloop.counter|divisibleby:"3" %}
-<hr />{% endif %}
+{% for p in object.photo_set.all %}
+    <section class="thumbnail">
+        <a class="fancybox-thumb"
+          name="{{ p.get_anchor }}"
+          rel="gallery"
+          href="{%  thumbnail p.img 960x960 %}"
+          title="{{ p.descriptio }}">
+            <img
+              src="{% thumbnail p.img 300x300 crop='smart' %}"
+              alt="{{ p.alt }}">
+        </a>
+        <h4>{{ p.alt }}</h4>
+    </section>
+    {% if forloop.counter|divisibleby:"3" %}<hr />{% endif %}
 {% endfor %}
 </div>
 <!-- pagination? -->

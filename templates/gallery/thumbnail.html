@@ -1,7 +1,0 @@
-{% load thumbnail %}
-<section class="thumbnail">
-  <a class="fancybox-thumb" name="{{ i.get_anchor }}" rel="gallery" href="{% thumbnail i.img 960x960 %}" title="{{ i.description }}">
-    <img src="{% thumbnail i.img 300x300 crop='smart' %}" alt="{{ i.alt }}"/>
-  </a>
-  <h4> {{ i.alt }}</h4>
-</section>

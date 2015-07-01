@@ -1,12 +1,19 @@
 {% extends "gallery/base.html" %}
-{% load i18n %}
+{% load i18n thumbnail %}
 {% block content %}
 <section>
   <h2>{% trans "Photoalbums" %}</h2>
 
   <div class="album_list">
-  {% for a in album_list %}
-    {% include "gallery/album_cover.html" %}
+  {% for a in object_list %}
+    <section class="album_cover">
+        <a rel="gallery" href="{{ a.get_absolute_url }}">
+            <img src="{% thumbnail a.cover 300x300 crop='smart' %}"
+                class="img-thumbnail photo"
+                itemprop="contentUrl">
+        </a>
+        <h3><a href="{{ a.get_absolute_url }}">{{ a.name }}</a></h3>
+    </section>
     {% if forloop.counter|divisibleby:"3" %}
     {% if not forloop.last %}<hr />{% endif %}
     {% endif %}

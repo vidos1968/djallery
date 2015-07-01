@@ -1,7 +1,0 @@
-{% load thumbnail %}
-<section class="album_cover">
-  <a rel="gallery" href="{{ a.get_absolute_url }}">
-    <img src="{% thumbnail a.cover 300x300 crop='smart' %}" class="img-thumbnail photo" itemprop="contentUrl" />
-  </a>
-  <h3><a href="{{ a.get_absolute_url }}">{{ a.name }}</a></h3>
-</section>
